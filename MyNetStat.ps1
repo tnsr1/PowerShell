@@ -1,4 +1,4 @@
-# интервал автообновления в секундах
+# РёРЅС‚РµСЂРІР°Р» Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёСЏ РІ СЃРµРєСѓРЅРґР°С…
 $interval = 5
 $lastUpdate = Get-Date
 
@@ -9,7 +9,7 @@ function Show-Connections {
         try {
             $proc = Get-Process -Id $c.OwningProcess -ErrorAction Stop
 
-            # Определяем направление
+            # РћРїСЂРµРґРµР»СЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
             $direction = if ($c.LocalAddress -eq "127.0.0.1" -or $c.LocalAddress -eq "::1") {
                 "Loopback"
             } elseif ($c.LocalPort -lt 1024) {
@@ -31,13 +31,13 @@ function Show-Connections {
 
     Clear-Host
     $list | Sort-Object ProcessName | Format-Table -AutoSize
-    Write-Host "`n[Space] обновить сейчас, [Esc] выйти, автообновление каждые $interval сек."
+    Write-Host "`n[Space] РѕР±РЅРѕРІРёС‚СЊ СЃРµР№С‡Р°СЃ, [Esc] РІС‹Р№С‚Рё, Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ РєР°Р¶РґС‹Рµ $interval СЃРµРє."
 }
 
 Show-Connections
 
 while ($true) {
-    # Проверяем нажатие клавиши
+    # РџСЂРѕРІРµСЂСЏРµРј РЅР°Р¶Р°С‚РёРµ РєР»Р°РІРёС€Рё
     if ([Console]::KeyAvailable) {
         $key = [Console]::ReadKey($true)
         if ($key.Key -eq 'Escape') { break }
@@ -47,7 +47,7 @@ while ($true) {
         }
     }
 
-    # Автообновление по таймеру
+    # РђРІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ РїРѕ С‚Р°Р№РјРµСЂСѓ
     if ((Get-Date) - $lastUpdate -gt (New-TimeSpan -Seconds $interval)) {
         Show-Connections
         $lastUpdate = Get-Date
