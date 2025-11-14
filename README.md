@@ -1,2 +1,2 @@
 # PowerShell
-PowerShell exaples
+PowerShell examples
